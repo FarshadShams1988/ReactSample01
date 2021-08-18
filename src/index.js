@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Book />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
