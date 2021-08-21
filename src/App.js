@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import './App.css'
-import {ProductList} from './ProductList'
+import {ProductList} from './Components/Product/ProductList'
 
 export const App = () => {
   const [showBtn, setShowBtn] = useState(true);
