@@ -21,9 +21,14 @@ export const ProductContainer = ({ item }) => {
 
     const saveItem = (id, title) => {
         console.log(id, title)
-        const index = books.findIndex(book => book.id === id)
-        books[index].title = title
-        books[index].editMode = false
+        let index = books.findIndex(book => book.id == id)
+        if (index > 0) {
+            books[index].title = title
+            books[index].editMode = false
+        }
+        else {
+            books.push({ id: id, categoryID: 0, title: title, price: 0, editMode: false });
+        }
         setBooks([...books])
     }
     return(
@@ -36,9 +41,7 @@ export const ProductContainer = ({ item }) => {
                     <ProductList books={books} removeBook={removeItem} editBook={editItem} saveBook={saveItem}/>
                 </div>
                 <div className="col-md-5">
-                    {/* { console.log(books.find(q => q.editMode == true))} */}
-                    <ProductForm item={books[books.findIndex(book => book.editMode === true)]}/>
-                    {/*<ProductForm item={books[1]}/>*/}
+                    <ProductForm item={books[books.findIndex(book => book.editMode === true)]} save={saveItem}/>
                 </div>
             </div>
         </>

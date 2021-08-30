@@ -1,25 +1,28 @@
 import {useForm} from "react-hook-form";
-import React from "react";
+import React, {useEffect} from "react";
 
-const ProductForm = ({item}) => {
-console.log(item);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({defaultValue: {...item}});
+const ProductForm = ({item, save}) => {
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm({defaultValue: {...item}});
+
+    useEffect(() => {
+        reset({...item})
+    }, [item]);
 
     function submit(data) {
-console.log('hi '+data);
-    }
+         save(data.id, data.title)
+    };
 
     return (
-
             <form onSubmit={handleSubmit(submit)}>
-                {console.log(item)}
-            <div>
+            <div className = "form-group">
                 <h4>شناسه</h4>
-                {/*<input value={item.id} {...register("id")}/>*/}
-            </div>
-            <div>
+                <input {...register("id", {required: 'true', minLength: 3})}/>
+                {errors?.id?.type === 'required' && <small className='text-danger form-text'>کد اجباری است</small>}
+                {errors?.id?.type === 'minLength' && <small className='text-danger form-text'>کد کمتر از 5 کاراکتر است</small>}
+           </div>
+            <div className = "form-group">
                 <h4>عنوان</h4>
-                {/*<input value={item.title} {...register("title")}/>*/}
+                <input {...register("title")}/>
             </div>
             <button type="submit" className="btn btn-success btn-sm mt-3">ذخیره</button>
         </form>
