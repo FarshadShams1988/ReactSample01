@@ -1,6 +1,7 @@
 import React from 'react'
 import {ProductInfo} from './ProductInfo';
 import {ProductEdit} from './ProductEdit';
+import PropTypes from 'prop-types';
 
 export const ProductList = ({showTableView, books, removeBook, editBook, saveBook}) => {
 
@@ -17,6 +18,10 @@ export const ProductList = ({showTableView, books, removeBook, editBook, saveBoo
         </>
     )
 }
+
+ProductList.propTypes = {
+  books: PropTypes.object
+};
 
 export const TableView = ({ books, removeBook, editBook }) => {
     return (

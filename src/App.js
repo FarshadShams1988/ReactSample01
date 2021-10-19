@@ -1,27 +1,37 @@
-import React, {useState} from 'react'
-import './App.css'
-import {ProductList} from './Components/Product/ProductList'
+import {ProductContainer} from "./Components/Product/ProductContainer";
+import MainDashboard from "./Components/Dashboard/MainDashboard";
+import "../src/css/App.css";
+import '../src/css/all.css'
+import '../src/css/screen.css'
+
+import {Route, BrowserRouter as Router, Switch, NavLink} from "react-router-dom";
 
 export const App = () => {
-  const [showBtn, setShowBtn] = useState(true);
-  const ShowBtnClick = () => {
-    setShowBtn(!showBtn)
-  }
-  return (
-    <>
-      <div>
-        <h1 className="brand" style={{ backgroundColor: "#67b367", textAlign: "center" }}>Session01 react</h1>
-      </div>
-      <hr />
-      <div>
-        <button className="btn btn-secondary ml-5" onClick={() => ShowBtnClick()}>{showBtn? "List View":"Table View"}</button>
-      </div>
-      <hr />
-      <div>
-        <ProductList showTableView={showBtn} />
-      </div>
-    </>
-  )
+	return (
+		<Router>
+			<div id="wrapper">
+				<div className="wrapper-holder">
+					<header id="header">
+						<a className="menu_trigger" href="#">menu</a>
+						<nav id="nav">
+							<ul>
+								<li><NavLink className="nav-link" activeClassName="activeLink" to="/" exact >داشبورد</NavLink></li>
+								<li><NavLink className="nav-link" activeClassName="activeLink" to="/product" exact >محصول</NavLink></li>
+								<li><a href="Portfolio.html">Portfolio</a></li>
+								<li><a href="Contact.html">Contact</a></li>
+							</ul>
+						</nav>
+						<h1 className="logo">Sample React</h1>
+						<h2 className="slogan">Professional Web Designer</h2>
+					</header>
+				</div>
+			</div>
+				<Switch>
+					<Route path="/product" exact component={ProductContainer}/>
+					<Route path="/" exact component={MainDashboard}/>
+				</Switch>
+		</Router>
+	)
 }
 
 export default App
